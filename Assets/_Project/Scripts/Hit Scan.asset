@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65a2d7d746797d4998b9db18d5222ac, type: 3}
   m_Name: Hit Scan
   m_EditorClassIdentifier: Assembly-CSharp::HitScanShootingBehavior
+  decalPrefab: {fileID: 7104800924054511346, guid: 60d4bdd4a38c2464a8894bb5b31696f0, type: 3}
