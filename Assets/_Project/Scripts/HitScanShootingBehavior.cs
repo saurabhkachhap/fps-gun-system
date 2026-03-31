@@ -11,8 +11,7 @@ public class HitScanShootingBehavior : ScriptableObject, IShootingBehavior
         if(Physics.Raycast(ray, out var hitInfo, data.Range, data.LayerMask))
         {
             var position = hitInfo.point;
-            Quaternion rotation = Quaternion.LookRotation(hitInfo.normal);
-            rotation *= Quaternion.Euler(0f, 0f, Random.Range(0, 360f));
+            Quaternion rotation = Quaternion.Euler(position.x, position.y, Random.Range(0, 360f));
             var offset = 0.01f * hitInfo.normal;
             Instantiate(decalPrefab, position + offset, rotation);
         }

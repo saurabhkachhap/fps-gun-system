@@ -865,6 +865,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 330585546}
     - target: {fileID: 758940736495989781, guid: 885c8a857a7470f419f90c641ff2b0fb, type: 3}
+      propertyPath: recoilDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a59d4260e05661746a5a609106bd7af6, type: 2}
+    - target: {fileID: 758940736495989781, guid: 885c8a857a7470f419f90c641ff2b0fb, type: 3}
+      propertyPath: recoilBehaviorAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a59d4260e05661746a5a609106bd7af6, type: 2}
+    - target: {fileID: 758940736495989781, guid: 885c8a857a7470f419f90c641ff2b0fb, type: 3}
       propertyPath: shootingBehaviorAsset
       value: 
       objectReference: {fileID: 11400000, guid: 503057a97931e7a4ab1a3f727de6a67f, type: 2}
