@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class SimpleRecoilBehavior : IRecoilBehavior
 {
-    private RecoilData data;
+    private SimpleRecoilData data;
 
     private Vector2 currentRecoil;
 
     public SimpleRecoilBehavior(RecoilData data)
     { 
-        this.data = data; 
+        this.data = data as SimpleRecoilData; 
     }
 
     public void ApplyRecoil()
@@ -22,6 +22,11 @@ public class SimpleRecoilBehavior : IRecoilBehavior
     public Vector3 GetOffset()
     {
         return new Vector3(currentRecoil.x, currentRecoil.y, 0f);
+    }
+
+    public void ResetRecoil()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void UpdateRecovery(float deltaTime)

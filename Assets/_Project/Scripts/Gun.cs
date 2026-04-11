@@ -8,12 +8,13 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private ScriptableObject shootingBehaviorAsset;
     [SerializeField] private RecoilData recoilDataAsset;
-    //[SerializeField] private ScriptableObject recoilBehaviorAsset;
+    [SerializeField] private CameraController cameraController;
 
     private bool ads;
     private IShootingBehavior shootingBehavior;
     private IRecoilBehavior recoilBehavior;
     //private ISpreadBehavior spreadBehavior;
+    private float lastFireTime;
 
     private void Awake()
     {
@@ -21,18 +22,21 @@ public class Gun : MonoBehaviour
         if (shootingBehavior is null)
             Debug.LogError("Invalid shooting behavior");
 
-        recoilBehavior = new SimpleRecoilBehavior(recoilDataAsset);
+        recoilBehavior = recoilDataAsset.CreateBehavior();
+        cameraController.SetRecoverySpeed(recoilDataAsset.recoverySpeed);
     }
-    //TODO Tile camera with recoil
+    
     public void Fire()
     {
+        if (Time.time < lastFireTime) return;
+        lastFireTime = Time.time + gunData.fireRate;
         Vector3 direction = cameraTransform.forward;
         recoilBehavior.ApplyRecoil();
-        direction += recoilBehavior.GetOffset();
-        
+        var offset = recoilBehavior.GetOffset();
+        cameraController.AddRecoil(offset);
         //direction = spreadBehavior.GetFinalDirection(direction, gunData);
 
-        shootingBehavior.Shoot(muzzleTransform.position, direction, gunData);
+        shootingBehavior.Shoot(cameraTransform.position, direction, gunData);
     }
 
     private void Update()
