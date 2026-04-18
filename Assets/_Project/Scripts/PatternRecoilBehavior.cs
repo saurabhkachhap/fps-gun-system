@@ -5,10 +5,12 @@ internal class PatternRecoilBehavior : IRecoilBehavior
     private PatternRecoilData data;
     private int currentIndex = 0;
     private Vector2 currentRecoil;
+    private Vector2 lastRecoil;
 
     public PatternRecoilBehavior(RecoilData data)
     {
         this.data = data as PatternRecoilData;
+        currentRecoil = Vector2.zero;
     }
 
     public void ApplyRecoil()
@@ -17,22 +19,28 @@ internal class PatternRecoilBehavior : IRecoilBehavior
         currentIndex++;
     }
 
-    public Vector3 GetOffset()
+    public Quaternion GetRotation()
     {
-        return new Vector3(currentRecoil.x, currentRecoil.y, 0f);
+        var offset = GetRecoilOffset();
+        return Quaternion.Euler(-offset.y, offset.x, 0f);
     }
 
-    private void ResetRecoil()
+    public Vector2 GetRecoil()        // for camera
+    {
+        return GetRecoilOffset();
+    }
+
+    private Vector2 GetRecoilOffset()
+    {
+        var offset = currentRecoil - lastRecoil;
+        lastRecoil = currentRecoil;
+        return offset;
+    }
+
+    public void Reset()
     {
         currentIndex = 0;
-    }
-
-    public void UpdateRecovery(float deltaTime)
-    {
-        currentRecoil = Vector2.Lerp(currentRecoil, Vector2.zero, data.recoverySpeed * deltaTime);
-
-        if(currentRecoil == Vector2.zero)
-            ResetRecoil();
-
+        currentRecoil = Vector2.zero;
+        lastRecoil = Vector2.zero;
     }
 }

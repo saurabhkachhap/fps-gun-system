@@ -19,14 +19,19 @@ public class SimpleRecoilBehavior : IRecoilBehavior
         currentRecoil += new Vector2(x, y);
     }
 
-    public Vector3 GetOffset()
-    {
-        return new Vector3(currentRecoil.x, currentRecoil.y, 0f);
-    }
-
-    public void ResetRecoil()
+    public Vector2 GetRecoil()
     {
         throw new System.NotImplementedException();
+    }
+
+    public Quaternion GetRotation()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Reset()
+    {
+        
     }
 
     public void UpdateRecovery(float deltaTime)

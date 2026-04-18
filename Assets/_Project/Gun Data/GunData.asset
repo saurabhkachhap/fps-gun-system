@@ -16,4 +16,5 @@ MonoBehaviour:
   <LayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 1
-  <fireRate>k__BackingField: 0.25
+  <FireRate>k__BackingField: 0.2
+  <SpreadAmount>k__BackingField: 0
